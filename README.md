@@ -1,99 +1,75 @@
-# Fraud Detection App
+# Fraud Risk Intelligence Console
 
-Live Demo 🚀🔗 - https://fraud-detection-k9th4vbrnxark9okngx2dx.streamlit.app/
+Live demo: https://fraud-detection-k9th4vbrnxark9okngx2dx.streamlit.app/
 
-A Streamlit web application for fraud detection in financial transactions using a pre-trained PyTorch model.
+A premium Streamlit experience for financial fraud detection using a pre-trained PyTorch GraphSAGE model. The application combines real-time transaction scoring, batch analytics, and executive-friendly reporting in a polished enterprise interface.
 
----
+## Highlights
+- Modern dashboard-style UI with a premium enterprise aesthetic
+- Single-transaction risk assessment for rapid review
+- High-volume CSV batch scoring with chunked processing
+- Interactive fraud probability analytics and downloadable reports
+- Clear risk classification for operational decision-making
 
-## 🚀 Features
-- **Manual Prediction:** Enter transaction details and get fraud probability.
-- **Bulk CSV Prediction:** Upload CSV files and process in chunks with progress bar.
-- **Visualizations:** Histogram, Confusion Matrix, ROC Curve (downloadable as PNG).
-- **Downloadable Results:** Save predictions as CSV.
+## What the app does
+The system evaluates transaction features such as amount, balances, and payment type to estimate the chance that a transaction is fraudulent. It supports both manual inspection and bulk review workflows for analysts and risk teams.
 
----
-🖥️ User Guide
+## Key features
+- Manual review mode for one-off transaction assessment
+- Bulk analytics mode for uploading CSV files and processing them efficiently
+- Probability distribution visualization
+- Confusion matrix and ROC curve when labeled test data is supplied
+- CSV export for predictions and review queues
 
-1️⃣ App Modes
+## Tech stack
+- Python
+- Streamlit
+- PyTorch
+- scikit-learn
+- pandas / numpy
+- seaborn / matplotlib
+- gdown
 
-When you launch the app, you will see two options in the sidebar:
+## Project structure
+- streamlit_app.py: main application UI and prediction workflow
+- model.py: model definition
+- train.py: training workflow
+- data_prep.py: preprocessing helpers
+- evaluate.py: evaluation utilities
+- requirements.txt: Python dependencies
 
-Single Transaction & Bulk CSV
+## Installation
+Create and activate a virtual environment, then install the dependencies:
 
-✅ Single Transaction Mode
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
 
-In this mode, you manually enter transaction details in the form.
-The app will predict if the transaction is Fraud or Not Fraud.
+## Running the app locally
+```bash
+streamlit run streamlit_app.py
+```
 
-Required Inputs:
+## Input requirements
+The app expects transaction data with the following fields:
+- step
+- type
+- amount
+- oldbalanceOrg
+- newbalanceOrig
+- oldbalanceDest
+- newbalanceDest
 
-step – Transaction time step (e.g., 100)
+For labeled evaluation, include an optional isFraud column. If present, the app can generate performance visualizations such as a confusion matrix and ROC curve.
 
-amount – Amount of transaction (e.g., 5000.0)
+## Usage guidance
+1. Open the app in your browser.
+2. Choose Manual Review for a single transaction or Bulk Analytics for a file upload.
+3. Set your threshold for what should be considered suspicious.
+4. Review the score, export results, and share reports with stakeholders.
 
-oldbalanceOrg – Balance before transaction for sender (e.g., 10000.0)
-
-newbalanceOrig – Balance after transaction for sender (e.g., 5000.0)
-
-oldbalanceDest – Balance before transaction for receiver (e.g., 2000.0)
-
-newbalanceDest – Balance after transaction for receiver (e.g., 7000.0)
-
-type – Transaction type (CASH_IN, CASH_OUT, DEBIT, PAYMENT, TRANSFER)
-
-🖲️ After submitting, you’ll see:
-
-Fraud Probability (0 to 1)
-
-Prediction (Fraud / Not Fraud)
-
-✅ Bulk CSV Mode
-
-In this mode, you upload a CSV file containing multiple transactions. The app will process them in chunks for efficiency.
-
-Expected CSV Format:
-
-Your CSV must include the following columns:
-
-Column Name	Description
-step	Time step of the transaction
-type	Type of transaction (CASH_IN, CASH_OUT, DEBIT, PAYMENT, TRANSFER)
-amount	Amount of the transaction
-oldbalanceOrg	Balance of the sender before the transaction
-newbalanceOrig	Balance of the sender after the transaction
-oldbalanceDest	Balance of the receiver before the transaction
-newbalanceDest	Balance of the receiver after the transaction
-isFraud (optional)	1 if fraud, 0 if not fraud (only required if you want performance metrics)
-
-⚠️ Important:
-
-If your file includes isFraud, the app will generate Confusion Matrix, ROC Curve, and Classification Report.
-
-If isFraud is missing, the app will only predict fraud probabilities.
-
-🖲️ Output in Bulk CSV Mode
-
-Predictions Table: Shows fraud probability and classification.
-
-High Probability Fraud Table: Filters only likely fraud transactions.
-
-Visualizations:
-
-Fraud Probability Distribution (histogram)
-
-Confusion Matrix (if isFraud exists)
-
-ROC Curve with AUC (if isFraud exists)
-
-Download Options:
-
-Fraud predictions as CSV
-
-
----
-
-## 🖥️ Running the App
-1. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
+## Notes
+- The model artifact model.pt should be present in the project root.
+- The preprocessing artifact is downloaded automatically on first run if it is not available locally.
