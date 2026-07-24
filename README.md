@@ -2,7 +2,8 @@
 
 Live demo: https://fraud-detection-k9th4vbrnxark9okngx2dx.streamlit.app/
 
-![Uploading Fruad Detection.png…]()
+<img width="1440" height="719" alt="Fruad Detection" src="https://github.com/user-attachments/assets/3431eb17-8606-4caf-b24b-7b6ac79f1670" />
+
 
 
 A premium Streamlit experience for financial fraud detection using a pre-trained PyTorch GraphSAGE model. The application combines real-time transaction scoring, batch analytics, and executive-friendly reporting in a polished enterprise interface.
