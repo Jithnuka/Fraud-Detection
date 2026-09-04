@@ -1,79 +1,106 @@
-# Fraud Risk Intelligence Console
+# 🛡️ Fraud Risk Intelligence Console
 
-Live demo: https://fraud-detection-k9th4vbrnxark9okngx2dx.streamlit.app/
+[![Live Demo](https://img.shields.io/badge/Streamlit-Live_App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://fraud-detection-k9th4vbrnxark9okngx2dx.streamlit.app/)
+[![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
-<img width="1440" height="719" alt="Fruad Detection" src="https://github.com/user-attachments/assets/3431eb17-8606-4caf-b24b-7b6ac79f1670" />
+> A modern enterprise-grade financial fraud detection engine powered by a custom **PyTorch Graph Neural Network (GraphSAGE)** model and packaged inside a high-performance **Streamlit** executive console.
 
+---
 
+## 🌟 Overview
 
-A premium Streamlit experience for financial fraud detection using a pre-trained PyTorch GraphSAGE model. The application combines real-time transaction scoring, batch analytics, and executive-friendly reporting in a polished enterprise interface.
+The **Fraud Risk Intelligence Console** delivers real-time transaction scoring, deep graph-based structural analysis, and batch risk auditing for financial institutions. Designed for compliance teams, fraud analysts, and risk executives, it bridges complex AI graph modeling with actionable operational decisions.
 
-## Highlights
-- Modern dashboard-style UI with a premium enterprise aesthetic
-- Single-transaction risk assessment for rapid review
-- High-volume CSV batch scoring with chunked processing
-- Interactive fraud probability analytics and downloadable reports
-- Clear risk classification for operational decision-making
+---
 
-## What the app does
-The system evaluates transaction features such as amount, balances, and payment type to estimate the chance that a transaction is fraudulent. It supports both manual inspection and bulk review workflows for analysts and risk teams.
+## ✨ Key Features
 
-## Key features
-- Manual review mode for one-off transaction assessment
-- Bulk analytics mode for uploading CSV files and processing them efficiently
-- Probability distribution visualization
-- Confusion matrix and ROC curve when labeled test data is supplied
-- CSV export for predictions and review queues
+- ⚡ **Single Transaction Scoring**: Instant manual risk evaluation for high-value or flagged financial activities.
+- 📦 **High-Volume CSV Batch Processing**: Chunked streaming pipeline designed to process large transaction files seamlessly.
+- 🎯 **Adjustable Risk Thresholds**: Dynamic decision engine allowing analysts to tune precision/recall trade-offs on the fly.
+- 📊 **Executive Analytics & ROC Curves**: Automatic generation of Probability Distributions, Confusion Matrices, and ROC-AUC curves for labeled evaluation data.
+- 📥 **Exportable Audit Logs**: One-click CSV export tailored for review queues and audit workflows.
 
-## Tech stack
-- Python
-- Streamlit
-- PyTorch
-- scikit-learn
-- pandas / numpy
-- seaborn / matplotlib
-- gdown
+---
 
-## Project structure
-- streamlit_app.py: main application UI and prediction workflow
-- model.py: model definition
-- train.py: training workflow
-- data_prep.py: preprocessing helpers
-- evaluate.py: evaluation utilities
-- requirements.txt: Python dependencies
+## 🏗️ Architecture & Project Structure
 
-## Installation
-Create and activate a virtual environment, then install the dependencies:
+```text
+Frud Detection/
+├── 📁 app/                   # Streamlit app views and modular components
+├── 📁 artifacts/             # Scalers, encoders, and pre-trained weights
+├── 📁 data/                  # Dataset samples and raw inputs
+├── 📁 models/                # PyTorch & GraphSAGE model architecture definitions
+├── 📁 notebooks/             # Exploratory Data Analysis & training notebooks
+├── 📁 src/                   # Core business logic, data preprocessing & graph pipeline
+├── 📄 streamlit_app.py       # Main Streamlit Console entrypoint
+└── 📄 requirements.txt       # Project dependencies
+```
+
+---
+
+## 📊 Expected Data Schema
+
+The model accepts transaction records containing the following financial feature vectors:
+
+| Field Name | Type | Description |
+| :--- | :--- | :--- |
+| `step` | `int` | Unit of time in the simulation (1 step = 1 hour) |
+| `type` | `string` | Transaction type (`PAYMENT`, `TRANSFER`, `CASH_OUT`, `DEBIT`, `CASH_IN`) |
+| `amount` | `float` | Amount of the transaction in local currency |
+| `oldbalanceOrg` | `float` | Initial balance of sender prior to transaction |
+| `newbalanceOrig` | `float` | Updated balance of sender post transaction |
+| `oldbalanceDest` | `float` | Initial balance of recipient prior to transaction |
+| `newbalanceDest` | `float` | Updated balance of recipient post transaction |
+| `isFraud` *(Optional)* | `int` | Ground truth target (0 = Legitimate, 1 = Fraudulent) |
+
+---
+
+## 🚀 Quick Start
+
+### 1. Clone & Setup Environment
 
 ```bash
+git clone https://github.com/your-username/fraud-detection-console.git
+cd "Frud Detection"
+
+# Create virtual environment
 python -m venv .venv
+
+# Activate environment
+# On macOS/Linux:
 source .venv/bin/activate
+# On Windows:
+# .venv\Scripts\activate
+```
+
+### 2. Install Dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-## Running the app locally
+### 3. Launch the Console
+
 ```bash
 streamlit run streamlit_app.py
 ```
 
-## Input requirements
-The app expects transaction data with the following fields:
-- step
-- type
-- amount
-- oldbalanceOrg
-- newbalanceOrig
-- oldbalanceDest
-- newbalanceDest
+Open `http://localhost:8501` in your browser to access the dashboard.
 
-For labeled evaluation, include an optional isFraud column. If present, the app can generate performance visualizations such as a confusion matrix and ROC curve.
+---
 
-## Usage guidance
-1. Open the app in your browser.
-2. Choose Manual Review for a single transaction or Bulk Analytics for a file upload.
-3. Set your threshold for what should be considered suspicious.
-4. Review the score, export results, and share reports with stakeholders.
+## 🌐 Online Live Demo
 
-## Notes
-- The model artifact model.pt should be present in the project root.
-- The preprocessing artifact is downloaded automatically on first run if it is not available locally.
+Experience the deployed version instantly without local installation:
+👉 **[Open Fraud Risk Intelligence Console](https://fraud-detection-k9th4vbrnxark9okngx2dx.streamlit.app/)**
+
+---
+
+## 📄 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+
