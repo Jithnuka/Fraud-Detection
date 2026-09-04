@@ -8,6 +8,7 @@
 > A modern enterprise-grade financial fraud detection engine powered by a custom **PyTorch Graph Neural Network (GraphSAGE)** model and packaged inside a high-performance **Streamlit** executive console.
 
 ---
+<img width="1440" height="719" alt="Fruad Detection" src="https://github.com/user-attachments/assets/3431eb17-8606-4caf-b24b-7b6ac79f1670" />
 
 ## 🌟 Overview
 
